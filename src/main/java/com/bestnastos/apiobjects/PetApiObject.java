@@ -24,13 +24,14 @@ public class PetApiObject extends BaseAPI {
 
     }
 
-    public Response findByStatus(String... statuses){
+    public Response findByStatus(String statuses){
         HashMap<String, Object> params = new HashMap<>();
         params.put("status", statuses);
         return RestAssured
                 .given(requestSpecification())
+                .log().parameters()
                 .queryParams(params)
-                .get("/pet/findByStatus")//try passing parameters here
+                .get("https://petstore.swagger.io/v2/pet/findByStatus")//try passing parameters here
                 .prettyPeek();
     }
 

@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.lessThan;
 
 public class BaseAPI {
 
-    protected final static String BASE_URI = "https://petstore.swagger.io/v2";
+//    protected final static String BASE_URI = "https://petstore.swagger.io/v2";
 
     @BeforeSuite(alwaysRun = true)
     public void beforeSuite(){
@@ -36,9 +36,9 @@ public class BaseAPI {
 
     public static RequestSpecification requestSpecification() {
         return new RequestSpecBuilder()
-                .setAccept(ContentType.XML)
+                .setAccept(ContentType.JSON)
 //                .addQueryParam("requestNumber", ++requestNumber)
-                .setBaseUri(BASE_URI)
+//                .setBaseUri(BASE_URI)
                 .build();
     }
 
