@@ -5,9 +5,13 @@ import com.bestnastos.base.BaseAPI;
 import com.bestnastos.constants.PetStatuses;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.restassured.path.json.JsonPath;
+import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @Feature("feature annotation")
 public class TestPet extends BaseAPI {
@@ -17,12 +21,18 @@ public class TestPet extends BaseAPI {
     public void testPet(){
         PetApiObject pet = new PetApiObject();
         System.out.println("=== TEST START ===\n");
-        pet
+        ExtractableResponse<Response> extractable = pet
                 .findByStatus(PetStatuses.sold)
                 .then()
                 .assertThat()
-                .spec(responseSpecificationOK());
-//        Object str = JsonPath.with(response.asString()).get("[0].name");
+                .spec(responseSpecificationOK())
+                .extract();
+
+        List<String> categories = extractable.path("category.name");
+        assertThat("List of pet categories should not be empty", categories.isEmpty());
+        List<String> ids = extractable.path("id");
+        assertThat("List of ids should not be empty", ids.isEmpty());
+//todo soft assert
         System.out.println("=== TEST END ===" );
 
     }
