@@ -16,11 +16,14 @@ public class TestPet extends BaseAPI {
     @Test(alwaysRun = true)
     public void testPet(){
         PetApiObject pet = new PetApiObject();
-        System.out.println("=== START ===" );
-        pet.findByStatus("sold")
-                .then().assertThat().spec(getResponseSpecification());
+        System.out.println("=== TEST START ===\n");
+        pet
+                .findByStatus(PetStatuses.sold)
+                .then()
+                .assertThat()
+                .spec(responseSpecificationOK());
 //        Object str = JsonPath.with(response.asString()).get("[0].name");
-        System.out.println("=== END ===" );
+        System.out.println("=== TEST END ===" );
 
     }
 }

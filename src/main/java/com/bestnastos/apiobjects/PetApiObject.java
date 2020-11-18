@@ -1,6 +1,7 @@
 package com.bestnastos.apiobjects;
 
 import com.bestnastos.base.BaseAPI;
+import com.bestnastos.constants.PetStatuses;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -24,14 +25,15 @@ public class PetApiObject extends BaseAPI {
 
     }
 
-    public Response findByStatus(String statuses){
+    public Response findByStatus(PetStatuses status){
         HashMap<String, Object> params = new HashMap<>();
-        params.put("status", statuses);
+        params.put("status", status.toString());
         return RestAssured
                 .given(requestSpecification())
-                .log().parameters()
+                .log()
+                .parameters()
                 .queryParams(params)
-                .get("https://petstore.swagger.io/v2/pet/findByStatus")//try passing parameters here
+                .get(GET_PET)
                 .prettyPeek();
     }
 
