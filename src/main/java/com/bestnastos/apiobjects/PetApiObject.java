@@ -1,13 +1,13 @@
 package com.bestnastos.apiobjects;
 
-import com.bestnastos.base.BaseAPI;
+import com.bestnastos.base.BaseAPITest;
 import com.bestnastos.constants.PetStatuses;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
 
-public class PetApiObject extends BaseAPI {
+public class PetApiObject extends BaseAPITest {
 
     private final String UPLOAD_IMAGE = "/pet/{petId}/uploadImage";
     private final String ADD_UPDATE_PET = "/pet";

@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeSuite;
 
 import static org.hamcrest.Matchers.lessThan;
 
-public class BaseAPI {
+public class BaseAPITest {
 
     protected final static String BASE_URI = "https://petstore.swagger.io/v2";
 
