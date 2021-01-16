@@ -30,10 +30,10 @@ public class TestPet extends BaseAPITest {
 
         List<String> categories = extractable.path("category.name");
         assertThat("List of pet categories should not be empty", !categories.isEmpty());
-        List<String> ids = extractable.path("id")
+        List<String> ids = extractable.path("id");
         assertThat("List of ids should not be empty", !ids.isEmpty());
 //todo soft assert
-        System.out.println("=== TEST END ===" );
+        System.out.println("=== TEST merge conflict ===" );
 
     }
 }
