@@ -12,28 +12,53 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 @Feature("feature annotation")
 public class TestPet extends BaseAPITest {
-
+    
     @Story("story annotation")
     @Test(alwaysRun = true)
-    public void testPet(){
-        PetApiObject pet = new PetApiObject();
-        System.out.println("=== TEST START ===\n");
-        ExtractableResponse<Response> extractable = pet
+    public void testPetWithExtractableResponse() {
+
+        System.out.println("\n=== TEST START ===\n");
+        
+        ExtractableResponse<Response> extractable = new PetApiObject()
                 .findByStatus(PetStatuses.sold)
                 .then()
                 .assertThat()
                 .spec(responseSpecificationOK())
                 .extract();
-
+        
         List<String> categories = extractable.path("category.name");
-        assertThat("List of pet categories should not be empty", !categories.isEmpty());
+        assertThat("List of pet categories should not be empty", categories.isEmpty()); //this assertion should fail for test purposes
         List<String> ids = extractable.path("id");
         assertThat("List of ids should not be empty", !ids.isEmpty());
-//todo soft assert
-        System.out.println("=== TEST conflict merge ===" );
-
+        
+        System.out.println("\n=== TEST end ===\n");
+        
+    }
+    
+    @Test(alwaysRun = true)
+    public void testPetWithMatcher() {
+    
+        PetApiObject pets = new PetApiObject();
+    
+        System.out.println("\n=== TEST START #1 ===\n");
+        pets
+                .findByStatus(PetStatuses.available)
+                .then()
+                .body("[0].status", equalTo("available"));
+        System.out.println("\n=== TEST END ===\n");
+    
+        
+        
+        System.out.println("\n=== TEST START #2 ===\n");
+        pets
+                .findByStatus(PetStatuses.sold)
+                .then()
+                .body("[0].status", equalTo("available"));//this assertion should fail for test purposes
+        System.out.println("\n=== TEST END ===\n");
+        
     }
 }
