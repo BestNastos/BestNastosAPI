@@ -12,11 +12,11 @@
     <parameter name="browser" value="chrome" />
 
     <test name="test">
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="value" />-->
-<!--            </run>-->
-<!--        </groups>-->
+        <groups>
+            <run>
+                <include name="test" />
+            </run>
+        </groups>
         <classes>
             <class name="com.bestnastos.apicases.TestPet"/>
 <!--            <methods>-->

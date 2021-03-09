@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class TestPet extends BaseAPITest {
     
     @Story("story annotation")
-    @Test(alwaysRun = true)
+    @Test(enabled = true)
     public void testPetWithExtractableResponse() {
 
         System.out.println("\n=== TEST START ===\n");
@@ -39,7 +39,7 @@ public class TestPet extends BaseAPITest {
         
     }
     
-    @Test(alwaysRun = true)
+    @Test(enabled = true)
     public void testPetWithMatcher() {
     
         PetApiObject pets = new PetApiObject();
@@ -59,6 +59,22 @@ public class TestPet extends BaseAPITest {
                 .then()
                 .body("[0].status", equalTo("available"));//this assertion should fail for test purposes
         System.out.println("\n=== TEST END ===\n");
+        
+    }
+    
+    @Test(enabled = true, groups = {"test"})
+    public void testDumbWayToSoftAssert() {
+        
+        System.out.println("\n=== TEST START ===\n");
+        new PetApiObject()
+                .findByStatus(PetStatuses.available)
+                .then()
+                .body("[0].status", equalTo("sold"),//this assertion should fail for test purposes
+                        "[1].status", equalTo("available"),
+                        "[2].status", equalTo("sold"));//this assertion should fail for test purposes
+    
+        System.out.println("\n=== TEST END ===\n");
+
         
     }
 }
