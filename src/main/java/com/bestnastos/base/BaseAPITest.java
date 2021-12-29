@@ -1,5 +1,6 @@
 package com.bestnastos.base;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -39,7 +40,10 @@ public class BaseAPITest {
                 .setAccept(ContentType.JSON)
 //                .addQueryParam("requestNumber", ++requestNumber)
                 .setBaseUri(BASE_URI)
-                .build();
+                .build()
+                .filter(new AllureRestAssured()
+                        .setRequestTemplate("custom-http-request.ftl")
+                        .setResponseTemplate("custom-http-response.ftl"));
     }
     //delete comment
 }
