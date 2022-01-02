@@ -41,9 +41,7 @@ public class BaseAPITest {
 //                .addQueryParam("requestNumber", ++requestNumber)
                 .setBaseUri(BASE_URI)
                 .build()
-                .filter(new AllureRestAssured()
-                        .setRequestTemplate("custom-http-request.ftl")
-                        .setResponseTemplate("custom-http-response.ftl"));
+                .filter(new AllureRestAssured());
     }
     //delete comment
 }

@@ -48,7 +48,7 @@ public class TestPet extends BaseAPITest {
         pets
                 .findByStatus(PetStatuses.available)
                 .then()
-                .body("[0].status", equalTo("available"));
+                .body("[0].status", equalTo(PetStatuses.available.toString()));
         System.out.println("\n=== TEST END ===\n");
     
         
@@ -57,7 +57,7 @@ public class TestPet extends BaseAPITest {
         pets
                 .findByStatus(PetStatuses.sold)
                 .then()
-                .body("[0].status", equalTo("available"));//this assertion should fail for test purposes
+                .body("[0].status", equalTo(PetStatuses.available.toString()));//this assertion should fail for test purposes
         System.out.println("\n=== TEST END ===\n");
         
     }
@@ -69,9 +69,9 @@ public class TestPet extends BaseAPITest {
         new PetApiObject()
                 .findByStatus(PetStatuses.available)
                 .then()
-                .body("[0].status", equalTo("sold"),//this assertion should fail for test purposes
-                        "[1].status", equalTo("available"),
-                        "[2].status", equalTo("sold"));//this assertion should fail for test purposes
+                .body("[0].status", equalTo(PetStatuses.sold.toString()),//this assertion should fail for test purposes
+                        "[1].status", equalTo(PetStatuses.available.toString()),
+                        "[2].status", equalTo(PetStatuses.sold.toString()));//this assertion should fail for test purposes
     
         System.out.println("\n=== TEST END ===\n");
 
