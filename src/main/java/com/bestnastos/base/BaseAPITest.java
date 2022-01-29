@@ -26,6 +26,14 @@ public class BaseAPITest {
 
     }
 
+    public static ResponseSpecification responseSpecification() {
+        return new ResponseSpecBuilder()
+                .expectContentType(ContentType.JSON)
+                .expectHeader("Connection", "keep-alive")
+                .expectResponseTime(lessThan(10000L))
+                 .build();
+    }
+
     public static ResponseSpecification responseSpecificationOK() {
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
