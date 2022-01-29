@@ -1,5 +1,6 @@
 package com.bestnastos.apiobjects;
 
+import com.bestnastos.Pet;
 import com.bestnastos.base.BaseAPITest;
 import com.bestnastos.constants.PetStatuses;
 import io.restassured.RestAssured;
@@ -42,14 +43,14 @@ public class PetApiObject extends BaseAPITest {
 "status": "available"
 }
      */
-    public Response update(Object pet){//create class Pet
+    public Response update(Pet pet){
+
         return RestAssured
                 .given(requestSpecification())
                 .log()
                 .parameters()
-                .body(pet, ObjectMapperType.GSON)//gson or json?
+                .body(pet.getPayload(), ObjectMapperType.GSON)
                 .contentType(ContentType.JSON)
-//                .header("Content-Type", "application/json")
                 .put(ADD_OR_UPDATE_PET)
                 .prettyPeek();
 

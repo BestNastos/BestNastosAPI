@@ -36,7 +36,15 @@ public class TestPet extends BaseAPITest {
         assertThat("List of ids should not be empty", !ids.isEmpty());
         
         System.out.println("\n=== TEST end ===\n");
-        
+        /*
+
+    when().
+            get("/lotto/{id}", 5).
+    then().
+            statusCode(200).
+            body("lotto.lottoId", equalTo(5),
+                 "lotto.winners.winnerId", hasItems(23, 54));n
+         */
     }
     
     @Test(enabled = true)
