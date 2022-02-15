@@ -26,7 +26,7 @@ public class TestGetPet extends BaseAPITest {
                 .getByStatus(com.bestnastos.constants.PetStatus.sold)
                 .then()
                 .assertThat()
-                .spec(responseSpecificationOK())
+                .spec(responseSpecJsonOK())
                 .extract();
         
         List<String> categories = extractable.path("category.name");

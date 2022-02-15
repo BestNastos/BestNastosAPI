@@ -10,6 +10,8 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Feature("Feature 'Update Pet'")
@@ -17,22 +19,23 @@ public class TestCreateUpdatePet extends BaseAPITest {
 
     @Story("Story 'Create and Update'")
     @Test(enabled = true)
-    public void testUpdatePet() {
+    public void testCRUDPet() {
 
         System.out.println("\n=== TEST START ===\n");
 
         String urlForCreate = "/urlForCreate";
         String urlForUpdate = "/urlForUpdate";
+        int randomNum = ThreadLocalRandom.current().nextInt(500, 100000);
 
         ExtractableResponse<Response> extractableResponseCreate = new PetApiObject()
                 .create(new Pet()
-                        .withCategory(1, "category")
-                        .withName("Kitty")
+                        .withCategory(randomNum, randomNum+"1")
+                        .withName(randomNum+"1")
                         .withPhotoUrls(urlForCreate)
-                        .withTag(3, "tag"))
+                        .withTag(randomNum, randomNum+"1"))
                 .then()
                 .assertThat()
-                .spec(responseSpecificationOK())
+                .spec(responseSpecJsonOK())
                 .extract();
 
         Long id = extractableResponseCreate.path("id");
@@ -45,11 +48,18 @@ public class TestCreateUpdatePet extends BaseAPITest {
                         .withPhotoUrls(urlForUpdate))
                 .then()
                 .assertThat()
-                .spec(responseSpecificationOK())
+                .spec(responseSpecJsonOK())
                 .extract();
 
         String urlAfterUpdate = extractableResponseUpdate.path("photoUrls[0]");
         assertThat("Url should be successfully updated", urlAfterUpdate.equals(urlForUpdate));
+
+       new PetApiObject()
+                .delete(id)
+                .then()
+                .assertThat()
+                .spec(responseSpecOK())
+                .extract();
 
         System.out.println("\n=== TEST end ===\n");
     }

@@ -15,31 +15,7 @@ public class PetApiObject extends BaseAPITest {
     private final String UPLOAD_IMAGE = "/pet/{petId}/uploadImage";
     private final String ADD_OR_UPDATE_PET = "/pet";
     private final String GET_PET = "/pet/findByStatus";
-
-    public void uploadImage(){
-
-    }
-
-    /*
-    {
-"id": 0,
-"category": {
-"id": 0,
-"name": "string"
-},
-"name": "doggie",
-"photoUrls": [
-"string"
-],
-"tags": [
-{
-  "id": 0,
-  "name": "string"
-}
-],
-"status": "available"
-}
-     */
+    private final String DELETE_PET = "/pet/{petId}";
 
     @Step("Create Pet")
     public Response create(Pet pet){
@@ -77,6 +53,17 @@ public class PetApiObject extends BaseAPITest {
                 .parameters()
                 .queryParams(params)
                 .get(GET_PET)
+                .prettyPeek();
+    }
+
+    @Step("Delete Pet")
+    public Response delete(Long id){
+        return RestAssured
+                .given(requestSpecification())
+                .log()
+                .parameters()
+                .pathParam("petId", id)
+                .delete(DELETE_PET)
                 .prettyPeek();
     }
 
