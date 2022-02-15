@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Pet {
 
-    private int id;
+    private Long id;
     private String name;
     private com.bestnastos.constants.PetStatus status;
     private List<String> photoUrls;
@@ -18,7 +18,7 @@ public class Pet {
         return this;
     }
 
-    public Pet withId(int id) {
+    public Pet withId(Long id) {
         this.id = id;
         payload.put("id", id);
         return this;

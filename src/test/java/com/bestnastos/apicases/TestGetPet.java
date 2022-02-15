@@ -23,7 +23,7 @@ public class TestGetPet extends BaseAPITest {
         System.out.println("\n=== TEST START ===\n");
         
         ExtractableResponse<Response> extractable = new PetApiObject()
-                .findByStatus(com.bestnastos.constants.PetStatus.sold)
+                .getByStatus(com.bestnastos.constants.PetStatus.sold)
                 .then()
                 .assertThat()
                 .spec(responseSpecificationOK())
@@ -53,7 +53,7 @@ public class TestGetPet extends BaseAPITest {
     
         System.out.println("\n=== TEST START #1 ===\n");
         pets
-                .findByStatus(com.bestnastos.constants.PetStatus.available)
+                .getByStatus(com.bestnastos.constants.PetStatus.available)
                 .then()
                 .body("[0].status", equalTo(com.bestnastos.constants.PetStatus.available.toString()));
         System.out.println("\n=== TEST END ===\n");
@@ -62,7 +62,7 @@ public class TestGetPet extends BaseAPITest {
         
         System.out.println("\n=== TEST START #2 ===\n");
         pets
-                .findByStatus(com.bestnastos.constants.PetStatus.sold)
+                .getByStatus(com.bestnastos.constants.PetStatus.sold)
                 .then()
                 .body("[0].status", equalTo(com.bestnastos.constants.PetStatus.available.toString()));//this assertion should fail for test purposes
         System.out.println("\n=== TEST END ===\n");
@@ -74,7 +74,7 @@ public class TestGetPet extends BaseAPITest {
         
         System.out.println("\n=== TEST START ===\n");
         new PetApiObject()
-                .findByStatus(com.bestnastos.constants.PetStatus.available)
+                .getByStatus(com.bestnastos.constants.PetStatus.available)
                 .then()
                 .body("[0].status", equalTo(com.bestnastos.constants.PetStatus.sold.toString()),//this assertion should fail for test purposes
                         "[1].status", equalTo(com.bestnastos.constants.PetStatus.available.toString()),

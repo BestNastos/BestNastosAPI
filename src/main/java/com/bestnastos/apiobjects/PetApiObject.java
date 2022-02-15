@@ -2,6 +2,7 @@ package com.bestnastos.apiobjects;
 
 import com.bestnastos.Pet;
 import com.bestnastos.base.BaseAPITest;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
@@ -19,9 +20,6 @@ public class PetApiObject extends BaseAPITest {
 
     }
 
-    public void add(){
-
-    }
     /*
     {
 "id": 0,
@@ -42,8 +40,9 @@ public class PetApiObject extends BaseAPITest {
 "status": "available"
 }
      */
-    public Response update(Pet pet){
 
+    @Step("Create Pet")
+    public Response create(Pet pet){
         return RestAssured
                 .given(requestSpecification())
                 .log()
@@ -55,7 +54,21 @@ public class PetApiObject extends BaseAPITest {
 
     }
 
-    public Response findByStatus(com.bestnastos.constants.PetStatus status){
+    @Step("Update Pet")
+    public Response update(Pet pet){
+        return RestAssured
+                .given(requestSpecification())
+                .log()
+                .parameters()
+                .body(pet.getPayload(), ObjectMapperType.GSON)
+                .contentType(ContentType.JSON)
+                .put(ADD_OR_UPDATE_PET)
+                .prettyPeek();
+
+    }
+
+    @Step("Get Pet by Status")
+    public Response getByStatus(com.bestnastos.constants.PetStatus status){
         HashMap<String, Object> params = new HashMap<>();
         params.put("status", status.toString());
         return RestAssured
