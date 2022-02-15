@@ -2,7 +2,6 @@ package com.bestnastos.apicases;
 
 import com.bestnastos.apiobjects.PetApiObject;
 import com.bestnastos.base.BaseAPITest;
-import com.bestnastos.constants.PetStatuses;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ExtractableResponse;
@@ -15,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @Feature("feature annotation")
-public class TestPet extends BaseAPITest {
+public class TestGetPet extends BaseAPITest {
     
     @Story("story annotation")
     @Test(enabled = true)
@@ -24,7 +23,7 @@ public class TestPet extends BaseAPITest {
         System.out.println("\n=== TEST START ===\n");
         
         ExtractableResponse<Response> extractable = new PetApiObject()
-                .findByStatus(PetStatuses.sold)
+                .findByStatus(com.bestnastos.constants.PetStatus.sold)
                 .then()
                 .assertThat()
                 .spec(responseSpecificationOK())
@@ -54,18 +53,18 @@ public class TestPet extends BaseAPITest {
     
         System.out.println("\n=== TEST START #1 ===\n");
         pets
-                .findByStatus(PetStatuses.available)
+                .findByStatus(com.bestnastos.constants.PetStatus.available)
                 .then()
-                .body("[0].status", equalTo(PetStatuses.available.toString()));
+                .body("[0].status", equalTo(com.bestnastos.constants.PetStatus.available.toString()));
         System.out.println("\n=== TEST END ===\n");
     
         
         
         System.out.println("\n=== TEST START #2 ===\n");
         pets
-                .findByStatus(PetStatuses.sold)
+                .findByStatus(com.bestnastos.constants.PetStatus.sold)
                 .then()
-                .body("[0].status", equalTo(PetStatuses.available.toString()));//this assertion should fail for test purposes
+                .body("[0].status", equalTo(com.bestnastos.constants.PetStatus.available.toString()));//this assertion should fail for test purposes
         System.out.println("\n=== TEST END ===\n");
         
     }
@@ -75,11 +74,11 @@ public class TestPet extends BaseAPITest {
         
         System.out.println("\n=== TEST START ===\n");
         new PetApiObject()
-                .findByStatus(PetStatuses.available)
+                .findByStatus(com.bestnastos.constants.PetStatus.available)
                 .then()
-                .body("[0].status", equalTo(PetStatuses.sold.toString()),//this assertion should fail for test purposes
-                        "[1].status", equalTo(PetStatuses.available.toString()),
-                        "[2].status", equalTo(PetStatuses.sold.toString()));//this assertion should fail for test purposes
+                .body("[0].status", equalTo(com.bestnastos.constants.PetStatus.sold.toString()),//this assertion should fail for test purposes
+                        "[1].status", equalTo(com.bestnastos.constants.PetStatus.available.toString()),
+                        "[2].status", equalTo(com.bestnastos.constants.PetStatus.sold.toString()));//this assertion should fail for test purposes
     
         System.out.println("\n=== TEST END ===\n");
 

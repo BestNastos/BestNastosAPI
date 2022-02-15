@@ -11,7 +11,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 @Feature("Feature 'Update Pet'")
-public class TestUpdatePet extends BaseAPITest {
+public class TestCreateUpdatePet extends BaseAPITest {
 
     @Story("Story 'Update'")
     @Test(enabled = true)

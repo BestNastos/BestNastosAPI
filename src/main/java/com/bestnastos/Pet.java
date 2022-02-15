@@ -1,20 +1,18 @@
 package com.bestnastos;
 
-import com.bestnastos.constants.PetStatuses;
-
 import java.util.*;
 
 public class Pet {
 
     private int id;
     private String name;
-    private PetStatuses status;
+    private com.bestnastos.constants.PetStatus status;
     private List<String> photoUrls;
     private Map<String, Object> category;
     private List<Map<String, Object>> tags;
     private Map<String, Object> payload = new HashMap<>();
 
-    public Pet withStatus(PetStatuses status) {
+    public Pet withStatus(com.bestnastos.constants.PetStatus status) {
         this.status = status;
         payload.put("status", status);
         return this;

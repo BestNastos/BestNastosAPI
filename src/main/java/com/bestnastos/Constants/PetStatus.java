@@ -1,6 +1,6 @@
 package com.bestnastos.constants;
 
-public enum PetStatuses {
+public enum PetStatus {
 
     available, pending, sold;
 }

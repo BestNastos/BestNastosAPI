@@ -2,7 +2,6 @@ package com.bestnastos.apiobjects;
 
 import com.bestnastos.Pet;
 import com.bestnastos.base.BaseAPITest;
-import com.bestnastos.constants.PetStatuses;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.mapper.ObjectMapperType;
@@ -56,7 +55,7 @@ public class PetApiObject extends BaseAPITest {
 
     }
 
-    public Response findByStatus(PetStatuses status){
+    public Response findByStatus(com.bestnastos.constants.PetStatus status){
         HashMap<String, Object> params = new HashMap<>();
         params.put("status", status.toString());
         return RestAssured

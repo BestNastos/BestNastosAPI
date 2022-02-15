@@ -18,7 +18,7 @@
             </run>
         </groups>
         <classes>
-            <class name="com.bestnastos.apicases.TestPet"/>
+            <class name="com.bestnastos.apicases.TestGetPet"/>
 <!--            <methods>-->
 <!--                <include name="value"/>-->
 <!--                </methods>-->
