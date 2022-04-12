@@ -1,7 +1,7 @@
 package com.bestnastos.apiobjects;
 
-import com.bestnastos.Pet;
-import com.bestnastos.base.BaseAPITest;
+import com.bestnastos.PetBuilder;
+import com.bestnastos.base.BaseTest;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -10,7 +10,7 @@ import io.restassured.response.Response;
 
 import java.util.HashMap;
 
-public class PetApiObject extends BaseAPITest {
+public class PetApiObject extends BaseTest {
 
     private final String UPLOAD_IMAGE = "/pet/{petId}/uploadImage";
     private final String ADD_OR_UPDATE_PET = "/pet";
@@ -18,12 +18,12 @@ public class PetApiObject extends BaseAPITest {
     private final String DELETE_PET = "/pet/{petId}";
 
     @Step("Create Pet")
-    public Response create(Pet pet){
+    public Response create(PetBuilder pet){
         return RestAssured
                 .given(requestSpecification())
                 .log()
                 .parameters()
-                .body(pet.getPayload(), ObjectMapperType.GSON)
+                .body(pet.buildPayload(), ObjectMapperType.GSON)
                 .contentType(ContentType.JSON)
                 .put(ADD_OR_UPDATE_PET)
                 .prettyPeek();
@@ -31,12 +31,12 @@ public class PetApiObject extends BaseAPITest {
     }
 
     @Step("Update Pet")
-    public Response update(Pet pet){
+    public Response update(PetBuilder pet){
         return RestAssured
                 .given(requestSpecification())
                 .log()
                 .parameters()
-                .body(pet.getPayload(), ObjectMapperType.GSON)
+                .body(pet.buildPayload(), ObjectMapperType.GSON)
                 .contentType(ContentType.JSON)
                 .put(ADD_OR_UPDATE_PET)
                 .prettyPeek();

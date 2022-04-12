@@ -1,7 +1,7 @@
 package com.bestnastos.apicases;
 
 import com.bestnastos.apiobjects.PetApiObject;
-import com.bestnastos.base.BaseAPITest;
+import com.bestnastos.base.BaseTest;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ExtractableResponse;
@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @Feature("feature annotation")
-public class TestGetPet extends BaseAPITest {
+public class TestGetPet extends BaseTest {
     
     @Story("story annotation")
     @Test(enabled = true)

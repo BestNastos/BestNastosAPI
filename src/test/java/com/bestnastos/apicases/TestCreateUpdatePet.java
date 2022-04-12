@@ -1,9 +1,9 @@
 package com.bestnastos.apicases;
 
 
-import com.bestnastos.Pet;
+import com.bestnastos.PetBuilder;
 import com.bestnastos.apiobjects.PetApiObject;
-import com.bestnastos.base.BaseAPITest;
+import com.bestnastos.base.BaseTest;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ExtractableResponse;
@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @Feature("Feature 'Update Pet'")
-public class TestCreateUpdatePet extends BaseAPITest {
+public class TestCreateUpdatePet extends BaseTest {
 
     @Story("Story 'Create and Update'")
     @Test(enabled = true)
@@ -28,7 +28,7 @@ public class TestCreateUpdatePet extends BaseAPITest {
         int randomNum = ThreadLocalRandom.current().nextInt(500, 100000);
 
         ExtractableResponse<Response> extractableResponseCreate = new PetApiObject()
-                .create(new Pet()
+                .create(new PetBuilder()
                         .withCategory(randomNum, randomNum+"1")
                         .withName(randomNum+"1")
                         .withPhotoUrls(urlForCreate)
@@ -43,7 +43,7 @@ public class TestCreateUpdatePet extends BaseAPITest {
         assertThat("Url should be successfully updated", urlAfterCreate.equals(urlForCreate));
 
         ExtractableResponse<Response> extractableResponseUpdate = new PetApiObject()
-                .update(new Pet()
+                .update(new PetBuilder()
                         .withId(id)
                         .withPhotoUrls(urlForUpdate))
                 .then()
