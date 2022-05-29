@@ -28,14 +28,19 @@ public class TestGetPet extends BaseAPITest {
                 .assertThat()
                 .spec(responseSpecJsonOK())
                 .extract();
-        
+
         List<String> categories = extractable.path("category.name");
         assertThat("List of pet categories should not be empty", categories.isEmpty()); //this assertion should fail for test purposes
         List<String> ids = extractable.path("id");
         assertThat("List of ids should not be empty", !ids.isEmpty());
 
-        int id = (int) extractable.path("find{it->it.name==\"Grumpy Cat\"}.id"); //just an example of how groovy script works
+        System.out.println("An example of how groovy script works-1");
+        int id = extractable.path("find{it->it.name==\"Grumpy Cat\"}.id");
         System.out.println("print id of Grumpy Cat: " + id);
+        System.out.println("An example of how groovy script works-2");
+        List<Integer> list = extractable.path("findAll{it->it.category.id > 10 && (it.category.id < 1000)}.category.id");
+        System.out.println("id list " + list);
+
 //        other examples:
 //        groovyPath = "statuses.find{it->it.spans[0].start==\"" + date + "\" && (it.type==\"TYPE\")}.spans[0].end";
 //        groovyPath2 = "statuses.findAll" +

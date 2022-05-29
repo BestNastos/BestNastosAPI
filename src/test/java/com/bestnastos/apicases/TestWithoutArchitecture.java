@@ -4,6 +4,9 @@ import com.bestnastos.Pet;
 import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
@@ -16,10 +19,9 @@ public class TestWithoutArchitecture {
 
     @Test
     public void testGet(){
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("status", "sold");
+
         RestAssured.given()
-                .queryParams(params)
+                .queryParams("status", "sold")
                 .get("https://petstore.swagger.io/v2/pet/findByStatus")
                 .prettyPeek()
 
@@ -50,10 +52,7 @@ public class TestWithoutArchitecture {
 
                 .then()
                 .assertThat()
-                .spec(new ResponseSpecBuilder()
-                        .expectContentType(ContentType.JSON)
-                        .expectStatusCode(HttpStatus.SC_OK)
-                        .build())
+                .statusCode(200)
                 .body("category.id", equalTo(5));
 
     }
@@ -69,8 +68,6 @@ public class TestWithoutArchitecture {
 
                 .then()
                 .assertThat()
-                .spec(new ResponseSpecBuilder()
-                        .expectStatusCode(HttpStatus.SC_OK)
-                        .build());
+                .statusCode(200);
     }
 }
