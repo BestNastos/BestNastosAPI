@@ -33,7 +33,14 @@ public class TestGetPet extends BaseAPITest {
         assertThat("List of pet categories should not be empty", categories.isEmpty()); //this assertion should fail for test purposes
         List<String> ids = extractable.path("id");
         assertThat("List of ids should not be empty", !ids.isEmpty());
-        
+
+        int id = (int) extractable.path("find{it->it.name==\"Grumpy Cat\"}.id"); //just an example of how groovy script works
+        System.out.println("print id of Grumpy Cat: " + id);
+//        other examples:
+//        groovyPath = "statuses.find{it->it.spans[0].start==\"" + date + "\" && (it.type==\"TYPE\")}.spans[0].end";
+//        groovyPath2 = "statuses.findAll" +
+//                "{it->it.spans[0].start==\"" + date + "\" && (it.type==\"TYPE\")}.context.contexts.type"))
+
         System.out.println("\n=== TEST end ===\n");
         /*
 
