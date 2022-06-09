@@ -27,14 +27,15 @@ public class TestWithoutArchitecture {
 
                 .then()
                 .assertThat()
+                //как вариант можно подать спек с ассертом внутрь метода спек:
                 .spec(new ResponseSpecBuilder()
                         .expectStatusCode(HttpStatus.SC_OK)
-                        .build())
-                .body("[0].status", equalTo("sold"));
+                        .expectBody("[0].status", equalTo("sold"))
+                        .build());
 
-//        Response response = RestAssured.given()
-//                .request(Method.GET, "https://petstore.swagger.io/v2/pet/findByStatus");
-//        System.out.println(response.getBody().asString());
+
+        Response response = RestAssured.given()
+                .request(Method.GET, "https://petstore.swagger.io/v2/pet/findByStatus");
     }
 
     @Test
