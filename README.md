@@ -1,4 +1,3 @@
 # BestNastosAPI
 
-Java
-RestAssured
+Java, RestAssured, TestNG
